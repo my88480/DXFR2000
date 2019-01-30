@@ -131,6 +131,27 @@ public class EntText extends EntBase{
 	*/
 	public double thickness = 0.0;
 
+	public  String unicode(String source){
+		StringBuffer sb = new StringBuffer();
+		char [] source_char = source.toCharArray();
+		String unicode = null;
+		for (int i=0;i<source_char.length;i++) {
+			char c = source_char[i];
+			//  Standard ASCII
+			if (c >= 0 && c <= 127) {
+				sb.append(c);
+				continue;
+			}
+			unicode = Integer.toHexString(c);
+			if (unicode.length() <= 2) {
+				unicode = "00" + unicode;
+			}
+			sb.append("\\U+" + unicode);
+		}
+		System.out.println(sb);
+		return sb.toString();
+	}
+
 	public void SliceText(){
 		String lines = this.text; 
 		
@@ -381,7 +402,7 @@ public class EntText extends EntBase{
 				DXF_STR.add(Double.toString(this.height));
 				DXF_STR.add("  1");
 				//DXF_STR.add(this.text);
-				DXF_STR.add(splitText[i]);
+				DXF_STR.add(unicode(splitText[i]));
 				
 				DXF_STR.add("  39");	
 				DXF_STR.add(Double.toString(this.thickness));	
