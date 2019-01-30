@@ -10,4 +10,4 @@ ENTITIES:<BR>
 ----TEXT<BR>
 ----ELLIPSE<BR>
 
-Now, this project support chinese character set(use Arial.ttf truetype font). Thanks to JadeChong https://github.com/JadeChong <BR>
+Now, this project supports chinese character set(use Arial.ttf truetype font). Thanks to JadeChong https://github.com/JadeChong <BR>
