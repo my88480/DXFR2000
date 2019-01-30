@@ -69,6 +69,7 @@ public class FileDXFTest{
 		
 		myFileDXF.secEntities.entities.add(new EntText(0,0,0,8,"This is mine.÷–Œƒ≤‚ ‘\r\nApache Flink 1.7.0 Release Announcement\nMessage from David Wu\nState schema evolution now works out-of-the-box\rthe integration of complex event processing with streaming SQL "));
 
+        myFileDXF.AddEllipse(new wPoint(0,0,0),new wPoint(200,0,0),0.5,0,2*Math.PI);
 
         System.out.println("Test toString method: ");
         System.out.println(myFileDXF);

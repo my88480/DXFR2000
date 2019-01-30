@@ -526,6 +526,18 @@ public class FileDXF{
         this.secEntities.entities.add(new EntPolyline(myPolyline));
     }
 	
+    /**
+     * AddEllipse(cP,lP,ratio_value,sAngle_value,eAngle_value)
+     * @param cP - center point of the Ellipse;
+     * @param lP - End point of the Ellipse on the long axis;
+     * @param ratio_value - Ratio of the Ellipse;
+     * @param sAngle_value - start angle of the Ellipse;
+     * @param eAngle_value - end angle of the Ellipse;
+     */
+    public void AddEllipse(wPoint cP,wPoint lP,double ratio_value,double sAngle_value,double eAngle_value) {
+        this.secEntities.entities.add(new EntEllipse(cP,lP,ratio_value,sAngle_value,eAngle_value));
+    }
+
 	
     /**
      * PrintAll()

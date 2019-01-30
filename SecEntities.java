@@ -196,6 +196,10 @@ public class SecEntities{
 				//EntVertex myvertex = (EntVertex) myEntity;
 				//DXF_STR.addAll(myvertex.GetDXFData());
 			}
+			else if (myEntity instanceof EntEllipse){
+				EntEllipse myEllipse = (EntEllipse) myEntity;
+				DXF_STR.addAll(myEllipse.GetDXFData());
+			}
 			
 			//this.entities.get(i).GetDXFData();
 			
