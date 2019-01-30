@@ -255,34 +255,38 @@ public class EntArc extends EntBase {
      * GetDXFData()
      * @return the dxf data of entity arc.
 	 * <pre>Output example:
-	 * 0
+	 *   0
 	 * ARC
-	 * 100
+	 *   5
+	 * 25F
+	 *   100
 	 * AcDbEntity
-	 * 8
+	 *   8
 	 * 0
-	 * 100
+	 *   100
+	 * AcDbCircle
+	 *   10
+	 * 132.54153503527186
+	 *   20
+	 * 253.8
+	  *  30
+	 * 0.0
+	 *   40
+	 * 21.0
+	 *   210
+	 * 0.0
+	  *  220
+	 * 0.0
+	 *   230
+	 * 1.0
+	 *   100
 	 * AcDbArc
-	 * 10
-	 * 10.0
-	 * 20
-	 * 10.0
-	 * 30
-	 * 10.0
-	 * 11
-	 * 50.2314
-	 * 21
-	 * 30.12546
-	 * 31
-	 * 80.01234567890124
-	 * 39
-	 * 0.0
-	 * 210
-	 * 0.0
-	 * 220
-	 * 0.0
-	 * 230
-	 * 1.0</pre>
+	 *   50
+	 * 90.0
+	  *  51
+	 * 163.8153602092225
+	 *   39
+	 * 0.0</pre>
      */
     public List<String> GetDXFData() {
         List<String> DXF_STR = new ArrayList<>();
@@ -293,35 +297,38 @@ public class EntArc extends EntBase {
 		DXF_STR.add("  5");
         DXF_STR.add(this.Handle);
 		
-		DXF_STR.add("  100");
+		DXF_STR.add("100");
         DXF_STR.add(this.ClassLabel);
+		DXF_STR.add("330");
+        DXF_STR.add("1F");
 
         //DXF_STR.add("8");
         //DXF_STR.add(this.layer);
 		DXF_STR.addAll(super.GetDXFData());
-		DXF_STR.add("  100");
+		DXF_STR.add("100");
         DXF_STR.add("AcDbCircle");
 		
 		DXF_STR.addAll(cPoint.GetDXFData());
 
         DXF_STR.add("  40");
         DXF_STR.add(Double.toString(this.radius));
-        DXF_STR.add("  210");
+        /*
+		DXF_STR.add("  210");
         DXF_STR.add(Double.toString(this.xExtrusionDirection));
         DXF_STR.add("  220");
         DXF_STR.add(Double.toString(this.yExtrusionDirection));
         DXF_STR.add("  230");
         DXF_STR.add(Double.toString(this.zExtrusionDirection));
-		
-        DXF_STR.add("  100");
+		*/
+        DXF_STR.add("100");
         DXF_STR.add(this.SubClassLabel);
 		
         DXF_STR.add("  50");
         DXF_STR.add(Double.toString(this.sAngle));
         DXF_STR.add("  51");
         DXF_STR.add(Double.toString(this.eAngle));
-        DXF_STR.add("  39");
-        DXF_STR.add(Double.toString(this.thickness));
+        //DXF_STR.add("  39");
+        //DXF_STR.add(Double.toString(this.thickness));
 
         return DXF_STR;
     }

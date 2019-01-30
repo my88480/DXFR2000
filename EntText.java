@@ -39,39 +39,39 @@ public class EntText extends EntBase{
     /**
      * code  40 - Height.
      */
-    public    double                      height          = 0.0;
+    public    double	height = 0.0;
 
     /**
      * code   1 - Text value (the string itself).
      */
-    public    String                      text            = null;
+    public    String	text = null;
 
 	public String[] splitText;
 
     /**
      * code  50 - Rotation angle (optional; default = 0).
      */
-    public    double                      rotang          = 0.0;
+    public    double	rotang          = 0.0;
 
 
     /**
      * code  41 - Relative X scale factor.
      *            For fit-type text (optional; default = 1.0).
      */
-    public    double                      relxscale       = 1.0;
+    public    double	relxscale  = 1.0;
 
 
     /**
      * code  51 - Oblique angle (optional default = 0).
      */
-    public    double                      obliqueang      = 0.0;
+    public    double obliqueang = 0.0;
 
 
     /**
      * code   7 - Text style name (optional; default = "STANDARD").
      *            Set to style table reference.
      */
-    public    String                style="Stardand";
+    public    String  style="Stardand";
 
 
     /**
@@ -81,7 +81,7 @@ public class EntText extends EntBase{
      *   <LI>4 = Text is upside down (mirrored in Y).
      * </UL>
      */
-    public    int                         textgenflags    = 0;
+    public    int	textgenflags  = 0;
 
 
     /**
@@ -97,7 +97,7 @@ public class EntText extends EntBase{
      * </UL>
      *      See vertalignflags for clarification.
      */
-    public    int                         horzalignflags  = 0;
+    public    int horzalignflags  = 0;
 
 
     /**
@@ -111,7 +111,7 @@ public class EntText extends EntBase{
      * </UL>
      *       See second_point for clarification.
      */
-    public    int                         vertalignflags  = 0;
+    public    int  vertalignflags  = 0;
 
 
     /**
@@ -123,7 +123,7 @@ public class EntText extends EntBase{
      *      alignment point (or the second alignment point for Aligned or Fit).
      *      (In OCS).
      */
-    public    wPoint               second_point ;
+    public    wPoint  second_point ;
 	
 	
 	/**
@@ -138,7 +138,7 @@ public class EntText extends EntBase{
 		lines=lines.replace("\n\r","\n");
 		lines=lines.replace("\r","\n");
 		splitText=lines.split("\n");
-		System.out.println("splitText's length: " + splitText.length);
+		//System.out.println("splitText's length: " + splitText.length);
 		
 		Handle = new String[splitText.length];
 		iPoint = new wPoint[splitText.length];
@@ -297,30 +297,54 @@ public class EntText extends EntBase{
      * GetDXFData()
      * @return the dxf data of entity text.
 	 * <pre>Output example:
-	 * 0
-	 * TEXT
-	 * 100
-	 * AcDbEntity
-	 * 8
-	 * 0
-	 * 100
-	 * AcDbText
-	 * 10
-	 * 10.0
-	 * 20
-	 * 10.0
-	 * 30
-	 * 10.0
-	 * 39
-	 * 0.0
-	 * 50
-	 * 0.0
-	 * 210
-	 * 0.0
-	 * 220
-	 * 0.0
-	 * 230
-	 * 1.0</pre>
+	*   0
+	* TEXT
+	*   5
+	* 113
+	* 330
+	* 1A7
+	* 100
+	* AcDbEntity
+	*   8
+	* 0
+	* 100
+	* AcDbText
+	*  10
+	* 0.0
+	*  20
+	* -194.25
+	*  30
+	* 0.0
+	*  40
+	* 27.75
+	*   1
+	* QUANTITY:10
+	* 100
+	* AcDbText
+	*   0
+	* TEXT
+	*   5
+	* 114
+	* 330
+	* 1A7
+	* 100
+	* AcDbEntity
+	*   8
+	* 0
+	* 100
+	* AcDbText
+	*  10
+	* 0.0
+	*  20
+	* -240.5
+	*  30
+	* 0.0
+	*  40
+	* 27.75
+	*   1
+	* REMARK:Deviation:0.1mm
+	* 100
+	* AcDbText</pre>
      */
 	 public List<String> GetDXFData(){
 		List<String> DXF_STR = new ArrayList<>();
@@ -343,13 +367,16 @@ public class EntText extends EntBase{
 				DXF_STR.add(this.SubClassLabel);
 				
 				//DXF_STR.addAll(this.bPoint.GetDXFData());
+				/*
 				DXF_STR.add("  10");
 				DXF_STR.add(Double.toString(iPoint[i].x));
 				DXF_STR.add("  20");
 				DXF_STR.add(Double.toString(iPoint[i].y));
 				DXF_STR.add("  30");
 				DXF_STR.add(Double.toString(iPoint[i].z));
-
+				*/
+				DXF_STR.addAll(iPoint[i].GetDXFData());
+				
 				DXF_STR.add("  40");
 				DXF_STR.add(Double.toString(this.height));
 				DXF_STR.add("  1");

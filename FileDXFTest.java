@@ -37,6 +37,15 @@ public class FileDXFTest{
 		
 		//myFileDXF.secEntities.entities = new  ArrayList<Object>();
 
+		EntLWPolyline myLWPolyline = new EntLWPolyline();
+
+		myLWPolyline.AddVertex(new wPoint(90,50));
+		myLWPolyline.AddVertex(new wPoint(80,40));
+		myLWPolyline.AddVertex(new wPoint(120,80));
+		myLWPolyline.AddVertex(new wPoint(150,100));
+		myLWPolyline.AddVertex(new wPoint(180,120));
+		myLWPolyline.AddVertex(new wPoint(200,80));
+		myFileDXF.secEntities.entities.add(myLWPolyline);
 		
 		EntPolyline myPolyline = new EntPolyline();
 

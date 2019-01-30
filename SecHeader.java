@@ -49,7 +49,7 @@ public class SecHeader
      *   <LI>AC1027 - CAD2013 2014 2015 2016 version.
      * </UL>
      */
-    public    String                      acadver = "AC1009";                // code   1
+    public    String   acadver = "AC1015";                // code   1
                                     
 
     /**
@@ -484,7 +484,7 @@ public class SecHeader
 		"  9",
 		"$DIMSCALE",
 		" 40",
-		"1.0",
+		"0.05",
 		"  9",
 		"$DIMASZ",
 		" 40",
@@ -632,15 +632,15 @@ public class SecHeader
 		"  9",
 		"$DIMCLRD",
 		" 70",
-		"     0",
+		"     6",
 		"  9",
 		"$DIMCLRE",
 		" 70",
-		"     0",
+		"     6",
 		"  9",
 		"$DIMCLRT",
 		" 70",
-		"     0",
+		"     6",
 		"  9",
 		"$DIMTFAC",
 		" 40",
@@ -684,11 +684,11 @@ public class SecHeader
 		"  9",
 		"$DIMDEC",
 		" 70",
-		"     0",
+		"     1",
 		"  9",
 		"$DIMTDEC",
 		" 70",
-		"     2",
+		"     1",
 		"  9",
 		"$DIMALTU",
 		" 70",

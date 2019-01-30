@@ -14,11 +14,6 @@ public class EntPolyline extends EntBase {
     public String EntityName = "POLYLINE";
 
     /**
-     * code  5 - Handle.
-     */
-    public String Handle;
-
-    /**
      * code  100 -Class Label.
      */
     public String ClassLabel = "AcDbEntity";
@@ -141,7 +136,6 @@ public class EntPolyline extends EntBase {
      */
     public EntPolyline() {
 		this.vertexs = new ArrayList<>();
-		Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -153,7 +147,6 @@ public class EntPolyline extends EntBase {
 		this.vertexs = new ArrayList<>();
 
 		this.vertexs.add(new EntVertex(x_value,y_value));
-		Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -165,7 +158,6 @@ public class EntPolyline extends EntBase {
     public EntPolyline(double x_value,double y_value,double z_value) {
 		this.vertexs = new ArrayList<>();
 		this.vertexs.add(new EntVertex(x_value,y_value,z_value));
-		Handle = FileDXF.ApplyHandle();
     }
 	
     /**
@@ -183,7 +175,6 @@ public class EntPolyline extends EntBase {
 				this.vertexs.add(new EntVertex(points[i][0],points[i][1],points[i][2]));
 			}
 		}
-		Handle = FileDXF.ApplyHandle();
     }
 	
 	
@@ -217,7 +208,7 @@ public class EntPolyline extends EntBase {
 		//this.vertexs.addAll(one_polyline.vertexs);
 		for(int i=0;i<one_polyline.vertexs.size();i++)
 		{
-			this.vertexs.add(one_polyline.vertexs.get(i));
+		  this.vertexs.add(one_polyline.vertexs.get(i));
 		}
 		
 		this.thickness = one_polyline.thickness;
@@ -235,8 +226,6 @@ public class EntPolyline extends EntBase {
 		this.xExtrusionDirection = one_polyline.xExtrusionDirection;
 		this.yExtrusionDirection = one_polyline.yExtrusionDirection;
 		this.zExtrusionDirection = one_polyline.zExtrusionDirection;
-		
-		Handle = FileDXF.ApplyHandle();
     }
 
      /**
@@ -286,6 +275,45 @@ public class EntPolyline extends EntBase {
         //System.out.println("End point:  "+"x = "+end_point.x+"   y = "+end_point.y+"   z = "+end_point.z);
     }
 
+
+    /**
+     * GetMapData()
+     * @return Map of elements description of Entity LINE.
+	 * <pre>Output example:
+	 * Map's Size: 10
+	 * key= Entity                     value= LINE
+	 * key= zExtrusionDirection                        value= 1.0
+	 * key= ClassLabel                 value= AcDbEntity
+	 * key= xExtrusionDirection                        value= 0.0
+	 * key= SubClassLabel                      value= AcDbLine
+	 * key= thickness                  value= 0.0
+	 * key= yExtrusionDirection                        value= 0.0
+	 * key= x                  value= 50.2314
+	 * key= y                  value= 30.12546
+	 * key= z                  value= 80.01234567890124</pre>
+     */
+	public List<String []> GetPairData(){
+		List<String []> params=new ArrayList<>();
+
+        params.add(new String[] {"Entity",this.EntityName});
+		
+		params.addAll(super.GetPairData());
+		
+        params.add(new String[] {"ClassLabel",this.ClassLabel});
+        params.add(new String[] {"SubClassLabel",this.SubClassLabel});
+		params.add(new String[] {"  8",super.layer});
+        
+        params.add(new String[] {"  66",Integer.toString(this.vtxFollow)});
+        params.add(new String[] {"  70",Integer.toString(this.TypeFlag)});
+			
+        for (int i  =  0; i < this.vertexs.size(); i++) {
+			params.addAll(this.vertexs.get(i).GetPairData());
+		}
+        params.add(new String[] {"  0","SEQEND"});
+
+        return params;
+    }
+
     /**
      * GetDXFData()
      * @return the dxf data of entity line.
@@ -325,9 +353,6 @@ public class EntPolyline extends EntBase {
 
         DXF_STR.add("  0");
         DXF_STR.add(this.EntityName);
-        
-		DXF_STR.add("  5");
-        DXF_STR.add(this.Handle);
 		
 		DXF_STR.addAll(super.GetDXFData());
 
