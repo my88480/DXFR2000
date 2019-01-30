@@ -8,3 +8,4 @@ ENTITIES:<BR>
 ----LWPOLYLINE<BR>
 ----POINT<BR>
 ----TEXT<BR>
+----ELLIPSE<BR>
