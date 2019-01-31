@@ -11,7 +11,7 @@ ENTITIES:<BR>
 ----ELLIPSE<BR>
   
   
-  Vesatile Contructor:
+  Vesatile Contructors:
   
 void	AddEllipse()
 AddEllipse(empty) default Ellipse.
