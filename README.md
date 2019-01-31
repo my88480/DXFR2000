@@ -142,7 +142,7 @@ Now, this project supports chinese character set(use system truetype font Arial.
 Unicode convert：
   This is mine.\U+4e2d\U+6587\U+6d4b\U+8bd5
   
-  This project supoorts 180W+ Entities.(lines,Tested succeed with AutoCAD R2008,the DXF file's size is 331M, which can not be deal with notepad++, you need ultraedit.In this case, the handle of entities section is more than 1B7812)
+  This project supports 180W+ Entities.(lines,Tested succeed with AutoCAD R2008,the DXF file's size is 331M, which can not be deal with notepad++, you need ultraedit.In this case, the handle of entities section is more than 1B7812)
   
 Thanks to :<BR>
 https://github.com/VVS1864/open_dxf_lib  for handle<BR>
