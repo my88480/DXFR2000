@@ -352,6 +352,9 @@ public class EntPolyline extends EntBase {
         DXF_STR.add("  0");
         DXF_STR.add(this.EntityName);
 
+        DXF_STR.add("330");
+        DXF_STR.add("1F");
+
         DXF_STR.addAll(super.GetDXFData());
 
         DXF_STR.add("  66");

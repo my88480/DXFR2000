@@ -260,6 +260,9 @@ public class EntLine extends EntBase {
         DXF_STR.add("  5");
         DXF_STR.add(this.Handle);
 
+        DXF_STR.add("330");
+        DXF_STR.add("1F");
+
         //System.out.println(FileDXF.hex_handle);
         //DXF_STR.add("8");
         //DXF_STR.add(this.layer);

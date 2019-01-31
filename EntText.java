@@ -379,6 +379,9 @@ public class EntText extends EntBase {
                 //DXF_STR.add(this.Handle);
                 DXF_STR.add(Handle[i]);
 
+				DXF_STR.add("330");
+				DXF_STR.add("1F");
+
                 DXF_STR.add("  100");
                 DXF_STR.add(this.ClassLabel);
 
