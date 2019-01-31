@@ -1,5 +1,5 @@
 //package www
-//AutoCAD Entity--Ellipse
+//AutoCAD Entity -- Ellipse
 import java.util.*;
 //import java.util.HashMap;
 
@@ -34,24 +34,24 @@ public class EntEllipse extends EntBase {
     wPoint cPoint;
 
     /**
-     * code  11,21,31 -Center Point location (in WCS).
+     * code  11,21,31 -Long axis Point location (in WCS).
      */
     wPoint lPoint;
 
     /**
-     * code  40 - Radius.
+     * code  40 - ratio.
      */
     public     double       ratio          = 0.0;
 
 
     /**
-     * code  50 - sAngle Degrees.
+     * code  41 - sAngle Degrees.
      */
     public     double       sAngle          = 0.0;
 
 
     /**
-     * code  51 - eAngle Degrees.
+     * code  42 - eAngle Degrees.
      */
     public     double       eAngle          = 0.0;
 

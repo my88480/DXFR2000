@@ -1,5 +1,5 @@
 //package www
-//AutoCAD Entity--Line
+//AutoCAD Entity -- EntLWPolyline
 import java.util.*;
 //import java.util.HashMap;
 
@@ -131,7 +131,7 @@ public class EntLWPolyline extends EntBase {
      */
     public EntLWPolyline() {
         this.Vertexs = new ArrayList<>();
-        Handle = FileDXF.ApplyHandle();
+        this.Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -139,11 +139,14 @@ public class EntLWPolyline extends EntBase {
      * @param x_value -x of start vertex;
      * @param y_value -y of start vertex;
      */
-    public EntLWPolyline(double x_value,double y_value) {
+    public EntLWPolyline(double[] x_value,double[] y_value) {
         this.Vertexs = new ArrayList<>();
 
-        this.Vertexs.add(new wPoint(x_value,y_value));
-        Handle = FileDXF.ApplyHandle();
+        for (int i = 0; i < x_value.length; i++) {
+		    this.Vertexs.add(new wPoint(x_value[i],y_value[i],0));
+		}
+		
+        this.Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -152,10 +155,14 @@ public class EntLWPolyline extends EntBase {
      * @param y_value -y of start vertex;
      * @param z_value -z of start vertex;
      */
-    public EntLWPolyline(double x_value,double y_value,double z_value) {
+    public EntLWPolyline(double[] x_value,double[] y_value,double[] z_value) {
         this.Vertexs = new ArrayList<>();
-        this.Vertexs.add(new wPoint(x_value,y_value,z_value));
-        Handle = FileDXF.ApplyHandle();
+		
+        for (int i = 0; i < x_value.length; i++) {
+		    this.Vertexs.add(new wPoint(x_value[i],y_value[i],z_value[i]));
+		}
+
+        this.Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -172,22 +179,15 @@ public class EntLWPolyline extends EntBase {
                 this.Vertexs.add(new wPoint(points[i][0],points[i][1],points[i][2]));
             }
         }
-        Handle = FileDXF.ApplyHandle();
+        this.Handle = FileDXF.ApplyHandle();
     }
-
-
 
     /**
      * AddVertex(one_point)
      * @param one_point -one vertex to add class EntLWPolyline;
      */
     public void AddVertex(wPoint one_point) {
-        /*
-        if (this.Vertexs.size() < 1){
-        	this.Vertexs = new ArrayList<>();
-        }
-        */
-        this.Vertexs.add(one_point);
+         this.Vertexs.add(one_point);
     }
 
     /**
@@ -224,7 +224,7 @@ public class EntLWPolyline extends EntBase {
         this.yExtrusionDirection = one_LWPolyline.yExtrusionDirection;
         this.zExtrusionDirection = one_LWPolyline.zExtrusionDirection;
 
-        Handle = FileDXF.ApplyHandle();
+        this.Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -243,15 +243,7 @@ public class EntLWPolyline extends EntBase {
         double Length = 0.0;
 
         for (int i = 1; i < this.Vertexs.size(); i++) {
-            //Length = Math.pow(Vertexs.get(i).x-Vertexs.get(i-1).x);
-            //Length = Math.sqrt(Math.pow(Vertexs.get(i).x-Vertexs.get(i-1).x));
-            double dx,dy,dz;
-
-            dx = this.Vertexs.get(i).x - this.Vertexs.get(i-1).x;
-            dy = this.Vertexs.get(i).y - this.Vertexs.get(i-1).y;
-            dz = this.Vertexs.get(i).z - this.Vertexs.get(i-1).z;
-
-            Length = Length + Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2) + Math.pow(dz,2) );
+            Length = Length + this.Vertexs.get(i).GetDistance(this.Vertexs.get(i-1));
         }
         return Length;
     }
@@ -261,8 +253,9 @@ public class EntLWPolyline extends EntBase {
       * Terminal output x,y of start_point and end_point.(one line for one point)
       */
     public void Print2D() {
-        //System.out.println("Start point:  "+"x = "+start_point.x+"   y = "+start_point.y);
-        //System.out.println("End point:  "+"x = "+end_point.x+"   y = "+end_point.y);
+        for (int i = 0; i < this.Vertexs.size(); i++) {
+			System.out.println("LWPolyline's point #" + i + ":\t" + "x = " + this.Vertexs.get(i).x + "\ty = " + this.Vertexs.get(i).y);
+        }
     }
 
     /**
@@ -270,8 +263,9 @@ public class EntLWPolyline extends EntBase {
      * Terminal output x,y,z of start_point and end_point.(one line for one point)
      */
     public void Print3D() {
-        //System.out.println("Start point:  "+"x = "+start_point.x+"   y = "+start_point.y+"   z = "+start_point.z);
-        //System.out.println("End point:  "+"x = "+end_point.x+"   y = "+end_point.y+"   z = "+end_point.z);
+        for (int i = 0; i < this.Vertexs.size(); i++) {
+			System.out.println("LWPolyline's point #" + i + ":\t" + "x = " + this.Vertexs.get(i).x + "\ty = " + this.Vertexs.get(i).y + "\tz = " + this.Vertexs.get(i).z);
+        }
     }
 
     /**
@@ -340,6 +334,7 @@ public class EntLWPolyline extends EntBase {
 
         DXF_STR.add("  70");
         DXF_STR.add(Integer.toString(this.TypeFlag));
+		
         DXF_STR.add("  43");
         DXF_STR.add(Double.toString(this.fixedwidth));
 

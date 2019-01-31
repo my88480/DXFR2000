@@ -527,6 +527,56 @@ public class FileDXF {
     }
 
     /**
+     * AddLWPolyline(empty).
+     */
+    public void AddLWPolyline() {
+        this.secEntities.entities.add(new EntLWPolyline());
+    }
+
+    /**
+     * AddLWPolyline(x_value,y_value)
+     * @param x_value -x of start vertex;
+     * @param y_value -y of start vertex;
+     */
+    public void AddLWPolyline(double[] x_value,double[] y_value) {
+        this.secEntities.entities.add(new EntLWPolyline(x_value,y_value));
+    }
+
+    /**
+     * AddLWPolyline(x_value,y_value,z_value)
+     * @param x_value -x of start vertex;
+     * @param y_value -y of start vertex;
+     * @param z_value -z of start vertex;
+     */
+    public void AddLWPolyline(double[] x_value,double[] y_value,double[] z_value) {
+        this.secEntities.entities.add(new EntLWPolyline(x_value,y_value,z_value));
+    }
+
+    /**
+     * AddLWPolyline(points)
+     * @param points - two dimensions array of double, x - points[i][0], y - points[i][1];
+     */
+    public void AddLWPolyline(double[][] points) {
+        this.secEntities.entities.add(new EntLWPolyline(points));
+    }
+
+    /**
+     * AddVertex(one_point)
+     * @param one_point -one vertex to add class EntLWPolyline;
+     */
+    public void AddLWPolylineVertex(EntLWPolyline theLWPolyline,wPoint one_point) {
+         theLWPolyline.Vertexs.add(one_point);
+    }
+
+    /**
+     * AddLWPolyline(one_LWPolyline)
+     * @param one_LWPolyline -one object derived from class EntLWPolyline;
+     */
+    public void AddLWPolyline(EntLWPolyline one_LWPolyline) {
+        this.secEntities.entities.add(new EntLWPolyline(one_LWPolyline));
+    }
+	
+    /**
      * AddEllipse(empty)  default Ellipse.
      */
     public void AddEllipse() {
@@ -865,6 +915,7 @@ public class FileDXF {
         */
     }
 
+	//The following function is complicate, Need to create one class FileImage
     /**
      * PNG_WRITER()
      * Try to create one image for DXF entities.
@@ -875,7 +926,7 @@ public class FileDXF {
         SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         this.jpg_filename = "cylinder_" + df.format(new Date()) + ".png";
 
-        String s="√ñ√ê√é√Ñ¬≤√¢√ä√îApache Flink 1.7.0 Release Announcement";
+        String s="÷–Œƒ≤‚ ‘Apache Flink 1.7.0 Release Announcement";
         Font font = new Font("SimSong", Font.BOLD, 25);
         BufferedImage bi = new BufferedImage(1200, 800, BufferedImage.TYPE_INT_RGB);
         //Graphics2D g2 = (Graphics2D) bi.getGraphics();
