@@ -64,3 +64,7 @@ AddEllipse(cP,lP,ratio_value,sAngle_value,eAngle_value)
 Now, this project supports chinese character set(use system truetype font Arial.ttf). Thanks to JadeChong https://github.com/JadeChong <BR>
 Unicode convert：
   This is mine.\U+4e2d\U+6587\U+6d4b\U+8bd5
+  
+  This project supoorts 20W+ Entities.(Tested succeed)
+  
+  
