@@ -67,4 +67,7 @@ Unicode convert：
   
   This project supoorts 20W+ Entities.(Tested succeed)
   
-  
+Thanks to :<BR>
+https://github.com/VVS1864/open_dxf_lib  for handle<BR>
+Ycad  for entities' definetion.<BR>
+
