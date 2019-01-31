@@ -55,9 +55,9 @@ public class EntLine extends EntBase {
     public EntLine() {
         this.sPoint = new wPoint();
         this.ePoint = new wPoint();
-		
-		Handle = FileDXF.ApplyHandle();
-		
+
+        Handle = FileDXF.ApplyHandle();
+
         /*
         x = 0.0;
         y = 0.0;
@@ -75,9 +75,9 @@ public class EntLine extends EntBase {
     public EntLine(double xs_value,double ys_value,double xe_value,double ye_value) {
         this.sPoint = new wPoint(xs_value,ys_value);
         this.ePoint = new wPoint(xe_value,ye_value);
-		
-		Handle = FileDXF.ApplyHandle();
-		
+
+        Handle = FileDXF.ApplyHandle();
+
 
         /*
         x = x_value;
@@ -99,14 +99,14 @@ public class EntLine extends EntBase {
         this.sPoint = new wPoint(xs_value,ys_value,zs_value);
         this.ePoint = new wPoint(xe_value,ye_value,ze_value);
 
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
         /*
         x = x_value;
         y = y_value;
         z = z_value;
         */
     }
-	
+
     /**
      * Constructor (sPoint,ePoint)
      * @param sPoint -x of start point;
@@ -115,8 +115,8 @@ public class EntLine extends EntBase {
     public EntLine(wPoint2D sPoint,wPoint2D ePoint) {
         this.sPoint = new wPoint(sPoint.x,sPoint.y,0.0);
         this.ePoint = new wPoint(ePoint.x,ePoint.y,0.0);
-		
-		Handle = FileDXF.ApplyHandle();
+
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -127,8 +127,8 @@ public class EntLine extends EntBase {
     public EntLine(wPoint sPoint,wPoint ePoint) {
         this.sPoint = new wPoint(sPoint);
         this.ePoint = new wPoint(ePoint);
-		
-		Handle = FileDXF.ApplyHandle();
+
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -144,61 +144,61 @@ public class EntLine extends EntBase {
         this.yExtrusionDirection = one_line.yExtrusionDirection;
         this.zExtrusionDirection = one_line.zExtrusionDirection;
 
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
      * Get the vectorial Radian angle of the line. [0 -- 2*PI]
      */
-	public double Angle2D(){
-		double R_Angle;
-		double delta_x,delta_y;
-		
-		delta_x = this.ePoint.x - this.sPoint.x;
-		delta_y = this.ePoint.y - this.sPoint.y;
-		R_Angle = Math.atan2(delta_y , delta_x);
-		
-		if (R_Angle < 0 ){
-			R_Angle = 2 * Math.PI + R_Angle;
-		}
-		
-		return R_Angle;
-	}
-	
+    public double Angle2D() {
+        double R_Angle;
+        double delta_x,delta_y;
+
+        delta_x = this.ePoint.x - this.sPoint.x;
+        delta_y = this.ePoint.y - this.sPoint.y;
+        R_Angle = Math.atan2(delta_y , delta_x);
+
+        if (R_Angle < 0 ) {
+            R_Angle = 2 * Math.PI + R_Angle;
+        }
+
+        return R_Angle;
+    }
+
     /**
      * Get the vectorial Radian angle of line. [0 -- 360]
      */
-	public double Angle2D_D(){
-		double R_Angle,D_Angle;
+    public double Angle2D_D() {
+        double R_Angle,D_Angle;
 
-		R_Angle = this.Angle2D();
-		
-		D_Angle = Math.toDegrees(R_Angle);
-		
-		return D_Angle;
-	}
-	 
-     /**
-     * GetLength()
-     * Get the length of the line;
-     */
-    public double GetLength() {
-		double Length = 0.0;
-		double dx,dy,dz;
-			
-		dx = this.ePoint.x - this.sPoint.x;
-		dy = this.ePoint.y - this.sPoint.y;
-		dz = this.ePoint.z - this.sPoint.z;
-			
-		Length = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2) + Math.pow(dz,2));
+        R_Angle = this.Angle2D();
 
-		return Length;
+        D_Angle = Math.toDegrees(R_Angle);
+
+        return D_Angle;
     }
 
-	 /**
-     * Print2D()
-     * Terminal output x,y of sPoint and ePoint.(one line for one point)
-     */
+    /**
+    * GetLength()
+    * Get the length of the line;
+    */
+    public double GetLength() {
+        double Length = 0.0;
+        double dx,dy,dz;
+
+        dx = this.ePoint.x - this.sPoint.x;
+        dy = this.ePoint.y - this.sPoint.y;
+        dz = this.ePoint.z - this.sPoint.z;
+
+        Length = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2) + Math.pow(dz,2));
+
+        return Length;
+    }
+
+    /**
+    * Print2D()
+    * Terminal output x,y of sPoint and ePoint.(one line for one point)
+    */
     public void Print2D() {
         System.out.println("Start point:  "+"x = "+sPoint.x+"   y = "+sPoint.y);
         System.out.println("End point:  "+"x = "+ePoint.x+"   y = "+ePoint.y);
@@ -217,37 +217,37 @@ public class EntLine extends EntBase {
     /**
      * GetDXFData()
      * @return the dxf data of entity line.
-	 * <pre>Output example:
-	 * 0
-	 * LINE
-	 * 100
-	 * AcDbEntity
-	 * 5
-	 * BB
-	 * 8
-	 * 0
-	 * 100
-	 * AcDbLine
-	 * 10
-	 * 10.0
-	 * 20
-	 * 10.0
-	 * 30
-	 * 10.0
-	 * 11
-	 * 50.2314
-	 * 21
-	 * 30.12546
-	 * 31
-	 * 80.01234567890124
-	 * 39
-	 * 0.0
-	 * 210
-	 * 0.0
-	 * 220
-	 * 0.0
-	 * 230
-	 * 1.0</pre>
+     * <pre>Output example:
+     * 0
+     * LINE
+     * 100
+     * AcDbEntity
+     * 5
+     * BB
+     * 8
+     * 0
+     * 100
+     * AcDbLine
+     * 10
+     * 10.0
+     * 20
+     * 10.0
+     * 30
+     * 10.0
+     * 11
+     * 50.2314
+     * 21
+     * 30.12546
+     * 31
+     * 80.01234567890124
+     * 39
+     * 0.0
+     * 210
+     * 0.0
+     * 220
+     * 0.0
+     * 230
+     * 1.0</pre>
      */
     public List<String> GetDXFData() {
         List<String> DXF_STR = new ArrayList<>();
@@ -260,23 +260,23 @@ public class EntLine extends EntBase {
         DXF_STR.add("  5");
         DXF_STR.add(this.Handle);
 
-		//System.out.println(FileDXF.hex_handle);
+        //System.out.println(FileDXF.hex_handle);
         //DXF_STR.add("8");
         //DXF_STR.add(this.layer);
-		DXF_STR.addAll(super.GetDXFData());
-		
+        DXF_STR.addAll(super.GetDXFData());
+
         DXF_STR.add("  100");
         DXF_STR.add(this.SubClassLabel);
-		
-		DXF_STR.addAll(sPoint.GetDXFData());
-		/*
+
+        DXF_STR.addAll(sPoint.GetDXFData());
+        /*
         DXF_STR.add("10");
         DXF_STR.add(Double.toString(sPoint.x));
         DXF_STR.add("20");
         DXF_STR.add(Double.toString(sPoint.y));
         DXF_STR.add("30");
         DXF_STR.add(Double.toString(sPoint.z));
-		*/
+        */
         DXF_STR.add("  11");
         DXF_STR.add(Double.toString(ePoint.x));
         DXF_STR.add("  21");

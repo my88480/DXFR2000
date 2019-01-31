@@ -13,9 +13,9 @@ public class EntCircle extends EntBase {
      */
     public String EntityName = "CIRCLE";
 
-   /**
-     * code  5 - Handle.
-     */
+    /**
+      * code  5 - Handle.
+      */
     public String Handle;
 
     /**
@@ -39,7 +39,7 @@ public class EntCircle extends EntBase {
      */
     public     double       radius          = 0.0;
 
-	
+
     /**
     * code  39 - Thickness (optional; default  =  0).
     */
@@ -59,8 +59,8 @@ public class EntCircle extends EntBase {
      */
     public EntCircle() {
         this.cPoint = new wPoint();
-		this.radius = 0.0;
-		Handle = FileDXF.ApplyHandle();
+        this.radius = 0.0;
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -71,8 +71,8 @@ public class EntCircle extends EntBase {
      */
     public EntCircle(double x_value,double y_value,double radius_value) {
         this.cPoint = new wPoint(x_value,y_value);
-		this.radius = radius_value;
-		Handle = FileDXF.ApplyHandle();
+        this.radius = radius_value;
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -84,8 +84,8 @@ public class EntCircle extends EntBase {
      */
     public EntCircle(double x_value,double y_value,double z_value,double radius_value) {
         this.cPoint = new wPoint(x_value,y_value,z_value);
-		this.radius = radius_value;
-		Handle = FileDXF.ApplyHandle();
+        this.radius = radius_value;
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -95,19 +95,19 @@ public class EntCircle extends EntBase {
      */
     public EntCircle(wPoint2D cPoint,double radius_value) {
         this.cPoint = new wPoint(cPoint.x,cPoint.y);
-		this.radius = radius_value;
-		Handle = FileDXF.ApplyHandle();
+        this.radius = radius_value;
+        Handle = FileDXF.ApplyHandle();
     }
 
-     /**
-     * Constructor (wPoint cPoint,double radius_value)
-     * @param cPoint -  center point of the circle;
-    * @param radius_value -radius of the circle;
-     */
+    /**
+    * Constructor (wPoint cPoint,double radius_value)
+    * @param cPoint -  center point of the circle;
+        * @param radius_value -radius of the circle;
+    */
     public EntCircle(wPoint cPoint,double radius_value) {
         this.cPoint = cPoint;
-		this.radius = radius_value;
-		Handle = FileDXF.ApplyHandle();
+        this.radius = radius_value;
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -116,12 +116,12 @@ public class EntCircle extends EntBase {
      */
     public EntCircle(EntCircle one_circle) {
         this.cPoint = one_circle.cPoint;
-		this.radius = one_circle.radius;
+        this.radius = one_circle.radius;
         this.thickness = one_circle.thickness;
         this.xExtrusionDirection = one_circle.xExtrusionDirection;
         this.yExtrusionDirection = one_circle.yExtrusionDirection;
         this.zExtrusionDirection = one_circle.zExtrusionDirection;
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -141,84 +141,84 @@ public class EntCircle extends EntBase {
         System.out.println("Start point:  "+"x = "+this.cPoint.x+"   y = " + this.cPoint.y+"   z = " + this.cPoint.z);
         System.out.println("radius:  "+"x = " + this.radius);
     }
-	
+
     /**Perimeter
      * GetPerimeter()
      * Get the area of the circle
      */
     public double GetPerimeter() {
-		double thePerimeter;
+        double thePerimeter;
 
-		thePerimeter = 2 * Math.PI * radius;
-		
-		return thePerimeter;
-	}
-	
+        thePerimeter = 2 * Math.PI * radius;
+
+        return thePerimeter;
+    }
+
     /**
      * GetArea()
      * Get the area of the circle
      */
     public double GetArea() {
-		double theArea;
+        double theArea;
 
-		theArea = Math.PI * Math.pow(radius,2);
-		
-		return theArea;
-	}
-	
+        theArea = Math.PI * Math.pow(radius,2);
+
+        return theArea;
+    }
+
     /**
      * GetDXFData()
      * @return the dxf data of entity circle.
-	 * <pre>Output example:
-	 * 0
-	 * CIRCLE
-	 * 100
-	 * AcDbEntity
-	 * 8
-	 * 0
-	 * 100
-	 * AcDbCircle
-	 * 10
-	 * 10.0
-	 * 20
-	 * 10.0
-	 * 30
-	 * 10.0
-	 * 11
-	 * 50.2314
-	 * 21
-	 * 30.12546
-	 * 31
-	 * 80.01234567890124
-	 * 39
-	 * 0.0
-	 * 210
-	 * 0.0
-	 * 220
-	 * 0.0
-	 * 230
-	 * 1.0</pre>
+     * <pre>Output example:
+     * 0
+     * CIRCLE
+     * 100
+     * AcDbEntity
+     * 8
+     * 0
+     * 100
+     * AcDbCircle
+     * 10
+     * 10.0
+     * 20
+     * 10.0
+     * 30
+     * 10.0
+     * 11
+     * 50.2314
+     * 21
+     * 30.12546
+     * 31
+     * 80.01234567890124
+     * 39
+     * 0.0
+     * 210
+     * 0.0
+     * 220
+     * 0.0
+     * 230
+     * 1.0</pre>
      */
     public List<String> GetDXFData() {
         List<String> DXF_STR = new ArrayList<>();
 
         DXF_STR.add("  0");
         DXF_STR.add(this.EntityName);
-        
-		DXF_STR.add("  5");
+
+        DXF_STR.add("  5");
         DXF_STR.add(this.Handle);
-		
-		DXF_STR.add("  100");
+
+        DXF_STR.add("  100");
         DXF_STR.add(this.ClassLabel);
 
         //DXF_STR.add("8");
         //DXF_STR.add(this.layer);
-		DXF_STR.addAll(super.GetDXFData());
-		
+        DXF_STR.addAll(super.GetDXFData());
+
         DXF_STR.add("  100");
         DXF_STR.add(this.SubClassLabel);
-		
-		DXF_STR.addAll(cPoint.GetDXFData());
+
+        DXF_STR.addAll(cPoint.GetDXFData());
 
         DXF_STR.add("  40");
         DXF_STR.add(Double.toString(this.radius));

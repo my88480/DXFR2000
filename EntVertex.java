@@ -131,7 +131,7 @@ public class EntVertex extends EntBase {
         base_point.y = 0.0;
         base_point.z = 0.0;
         */
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -145,7 +145,7 @@ public class EntVertex extends EntBase {
         base_point.y = 0.0;
         base_point.z = 0.0;
         */
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -160,7 +160,7 @@ public class EntVertex extends EntBase {
         base_point.y = y_value;
         base_point.z = 0.0;
         */
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -176,7 +176,7 @@ public class EntVertex extends EntBase {
         base_point.y = y_value;
         base_point.z = z_value;
         */
-		Handle = FileDXF.ApplyHandle();
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -185,16 +185,16 @@ public class EntVertex extends EntBase {
      */
     public EntVertex(EntVertex onepoint) {
 
-		base_point = new wPoint(onepoint.base_point.x,onepoint.base_point.y,onepoint.base_point.z);
+        base_point = new wPoint(onepoint.base_point.x,onepoint.base_point.y,onepoint.base_point.z);
 
-		/* the following codes are right.
-		base_point = new wPoint();
+        /* the following codes are right.
+        base_point = new wPoint();
 
         this.base_point.x = onepoint.base_point.x;
         this.base_point.y = onepoint.base_point.y;
         this.base_point.z = onepoint.base_point.z;
-		*/
-		Handle = FileDXF.ApplyHandle();
+        */
+        Handle = FileDXF.ApplyHandle();
     }
 
     /**
@@ -212,7 +212,7 @@ public class EntVertex extends EntBase {
     public void Print3D() {
         System.out.println("x = "+base_point.x+"   y = "+base_point.y+"   z = "+base_point.z);
     }
-	
+
     /**
      * GetDXFData()
      * @return the dxf data of entity point.
@@ -233,27 +233,27 @@ public class EntVertex extends EntBase {
 
         DXF_STR.add("  0");
         DXF_STR.add(this.EntityName);
-        
-		DXF_STR.add("  5");
+
+        DXF_STR.add("  5");
         DXF_STR.add(this.Handle);
-        
-		DXF_STR.addAll(super.GetDXFData());
+
+        DXF_STR.addAll(super.GetDXFData());
 
         //DXF_STR.add("8");
         //DXF_STR.add(this.layer);
 
         DXF_STR.addAll(this.base_point.GetDXFData());
-		/*
+        /*
         DXF_STR.add("10");
         DXF_STR.add(Double.toString(base_point.x));
         DXF_STR.add("20");
         DXF_STR.add(Double.toString(base_point.y));
         DXF_STR.add("30");
         DXF_STR.add(Double.toString(base_point.z));
-		*/
+        */
 
         return DXF_STR;
     }
-	
+
 
 }

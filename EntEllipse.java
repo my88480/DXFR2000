@@ -71,101 +71,10 @@ public class EntEllipse extends EntBase {
     public double   zExtrusionDirection = 1;
 
     /**
-     * Constructor (empty).
+     * Constructor (empty)  default Ellipse.
      */
     public EntEllipse() {
-        this.cPoint = new wPoint();
-        this.lPoint = new wPoint();
-        this.ratio = 0.0;
-        this.sAngle = 0.0;
-        this.eAngle = 2 * Math.PI;
-        Handle = FileDXF.ApplyHandle();
-    }
-
-    /**
-     * Constructor (xc_value, yc_value, zc_value, xl_value, yl_value, zl_value, ratio_value, sAngle_value,eAngle_value)
-     * @param xc_value - x of the Ellipse's center point;
-     * @param yc_value - y of the Ellipse's center point;
-     * @param zc_value - z of the Ellipse's center point;
-     * @param xl_value - x of the Ellipse's long axis point;
-     * @param yl_value - y of the Ellipse's long axis point;
-     * @param zl_value - z of the Ellipse's long axis point;
-     * @param ratio_value - ratio of the Ellipse(short axis / long axis);
-     * @param sAngle_value - start angle of the Ellipse;
-     * @param eAngle_value - end angle of the Ellipse;
-     */
-    public EntEllipse(double xc_value,double yc_value,double zc_value,double xl_value,double yl_value,double zl_value,double ratio_value,double sAngle_value,double eAngle_value) {
-        this.cPoint = new wPoint(xc_value,yc_value,zc_value);
-        this.lPoint = new wPoint(xl_value,yl_value,zl_value);
-        this.ratio = ratio_value;
-        this.sAngle = sAngle_value;
-        this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
-    }
-
-    /**
-     * Constructor (double x_value,double y_value,double ratio_value,double sAngle_value,double eAngle_value)
-     * @param x_value -x of the Ellipse's center point;
-     * @param y_value -y of the Ellipse's center point;
-     * @param ratio_value -ratio of the Ellipse;
-     * @param sAngle_value - start angle of the Ellipse;
-     * @param eAngle_value - end angle of the Ellipse;
-     */
-    public EntEllipse(double x_value,double y_value,double ratio_value,double sAngle_value,double eAngle_value) {
-        this.cPoint = new wPoint(x_value,y_value);
-        this.ratio = ratio_value;
-        this.sAngle = sAngle_value;
-        this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
-    }
-
-    /**
-     * Constructor (wPoint2D Pc,double ratio_value,double sAngle_value,double eAngle_value)
-     * @param Pc - center point of the Ellipse;
-     * @param ratio_value -ratio of the Ellipse;
-     * @param sAngle_value - start angle of the Ellipse;
-     * @param eAngle_value - end angle of the Ellipse;
-     */
-    public EntEllipse(wPoint2D Pc,double ratio_value,double sAngle_value,double eAngle_value) {
-        this.cPoint = new wPoint(Pc);
-        this.ratio = ratio_value;
-        this.sAngle = sAngle_value;
-        this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
-    }
-
-    /**
-     * Constructor (double x_value,double y_value,double z_value,double ratio_value,double sAngle_value,double eAngle_value)
-     * @param x_value -x of the Ellipse's center point;
-     * @param y_value -y of the Ellipse's center point;
-     * @param z_value -z of the Ellipse's center point;
-     * @param ratio_value - ratio of the Ellipse;
-     * @param sAngle_value - start angle of the Ellipse;
-     * @param eAngle_value - end angle of the Ellipse;
-     */
-    public EntEllipse(double x_value,double y_value,double z_value,double ratio_value,double sAngle_value,double eAngle_value) {
-        this.cPoint = new wPoint(0,0,0);
-        this.lPoint = new wPoint(x_value,y_value,z_value);
-        this.ratio = ratio_value;
-        this.sAngle = sAngle_value;
-        this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
-    }
-
-    /**
-     * Constructor (wPoint lP,double ratio_value,double sAngle_value,double eAngle_value)
-     * @param lP - center point of the Ellipse;
-     * @param ratio_value -ratio of the Ellipse;
-     * @param sAngle_value - start angle of the Ellipse;
-     * @param eAngle_value - end angle of the Ellipse;
-     */
-    public EntEllipse(wPoint lP,double ratio_value,double sAngle_value,double eAngle_value) {
-        this.cPoint = new wPoint(0,0,0);
-        this.lPoint = lP;
-        this.ratio = ratio_value;
-        this.sAngle = sAngle_value;
-        this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
+        this(new wPoint(0,0,0),new wPoint(10,0,0),0.5,0,2 * Math.PI);
     }
 
     /**
@@ -182,35 +91,155 @@ public class EntEllipse extends EntBase {
         this.ratio = ratio_value;
         this.sAngle = sAngle_value;
         this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
+        this.Handle = FileDXF.ApplyHandle();
     }
 
     /**
-     * Constructor (Po,Pa,Pb)
-     * @param Po - Center point of the Ellipse;
-     * @param Pa - Start point of the Ellipse;
-     * @param Pb - End point of the Ellipse;
+     * Constructor (cP,lP,ratio_value)
+     * @param cP - center point of the Ellipse;
+     * @param lP - End point of the Ellipse on the long axis;
+     * @param ratio_value - Ratio of the Ellipse;
      */
-    public EntEllipse(wPoint2D Po,wPoint2D Pa,wPoint2D Pb) {
-        double radis,sAngle_value,eAngle_value;
-        double rb;
+    public EntEllipse(wPoint cP,wPoint lP,double ratio_value) {
+        this(cP,lP,ratio_value,0,2 * Math.PI);
+    }
 
-        ratio = Math.sqrt(Math.pow(Pa.x-Po.x,2) + Math.pow(Pa.y-Po.y,2));
-        rb  = Math.sqrt(Math.pow(Pa.x-Po.x,2) + Math.pow(Pa.y-Po.y,2));
+    /**
+     * Constructor (xc_value, yc_value, zc_value, xl_value, yl_value, zl_value, ratio_value, sAngle_value,eAngle_value)
+     * @param xc_value - x of the Ellipse's center point;
+     * @param yc_value - y of the Ellipse's center point;
+     * @param zc_value - z of the Ellipse's center point;
+     * @param xl_value - x of the Ellipse's long axis point;
+     * @param yl_value - y of the Ellipse's long axis point;
+     * @param zl_value - z of the Ellipse's long axis point;
+     * @param ratio_value - ratio of the Ellipse(short axis / long axis);
+     * @param sAngle_value - start angle of the Ellipse;
+     * @param eAngle_value - end angle of the Ellipse;
+     */
+    public EntEllipse(double xc_value,double yc_value,double zc_value,double xl_value,double yl_value,double zl_value,double ratio_value,double sAngle_value,double eAngle_value) {
+        this(new wPoint(xc_value,yc_value,zc_value),new wPoint(xl_value,yl_value,zl_value),ratio_value,sAngle_value,eAngle_value);
+    }
 
-        if (Math.abs(rb-ratio) > 0.2) {
-            System.out.println("Invalid input. delta ratio=" + Math.abs(rb-ratio));
-        }
+    /**
+     * Constructor (xc_value, yc_value, zc_value, xl_value, yl_value, zl_value, ratio_value, sAngle_value,eAngle_value)
+     * @param xc_value - x of the Ellipse's center point;
+     * @param yc_value - y of the Ellipse's center point;
+     * @param xl_value - x of the Ellipse's long axis point;
+     * @param yl_value - y of the Ellipse's long axis point;
+     * @param ratio_value - ratio of the Ellipse(short axis / long axis);
+     * @param sAngle_value - start angle of the Ellipse;
+     * @param eAngle_value - end angle of the Ellipse;
+     */
+    public EntEllipse(double xc_value,double yc_value,double xl_value,double yl_value,double ratio_value,double sAngle_value,double eAngle_value) {
+        this(new wPoint(xc_value,yc_value),new wPoint(xl_value,yl_value),ratio_value,sAngle_value,eAngle_value);
+    }
 
-        sAngle_value = Math.toDegrees(Math.atan2((Pa.y - Po.y) , (Pa.x - Po.x)));
+    /**
+     * Constructor (xc_value, yc_value, zc_value, xl_value, yl_value, zl_value, ratio_value)
+     * @param xc_value - x of the Ellipse's center point;
+     * @param yc_value - y of the Ellipse's center point;
+     * @param xl_value - x of the Ellipse's long axis point;
+     * @param yl_value - y of the Ellipse's long axis point;
+     * @param ratio_value - ratio of the Ellipse(short axis / long axis);
+     */
+    public EntEllipse(double xc_value,double yc_value,double xl_value,double yl_value,double ratio_value) {
+        this(new wPoint(xc_value,yc_value),new wPoint(xl_value,yl_value),ratio_value,0,2 * Math.PI);
+    }
 
-        eAngle_value = Math.toDegrees(Math.atan2((Pb.y - Po.y) , (Pb.x - Po.x)));
+    /**
+     * Constructor (x_value,y_value,z_value,ratio_value,sAngle_value,eAngle_value)
+     * @param x_value -x of the Ellipse's long axis point;
+     * @param y_value -y of the Ellipse's long axis point;
+     * @param z_value -z of the Ellipse's long axis point;
+     * @param ratio_value - ratio of the Ellipse;
+     * @param sAngle_value - start angle of the Ellipse;
+     * @param eAngle_value - end angle of the Ellipse;
+     */
+    public EntEllipse(double x_value,double y_value,double z_value,double ratio_value,double sAngle_value,double eAngle_value) {
+        this(new wPoint(0,0,0),new wPoint(x_value,y_value,z_value),ratio_value,sAngle_value,eAngle_value);
+    }
 
-        this.cPoint = new wPoint(Po.x,Po.y,0.0);
-        this.ratio = ratio;
-        this.sAngle = sAngle_value;
-        this.eAngle = eAngle_value;
-        Handle = FileDXF.ApplyHandle();
+    /**
+     * Constructor (x_value,y_value,z_value,ratio_value)
+     * @param x_value -x of the Ellipse's long axis point;
+     * @param y_value -y of the Ellipse's long axis point;
+     * @param z_value -z of the Ellipse's long axis point;
+     * @param ratio_value - ratio of the Ellipse;
+     */
+    public EntEllipse(double x_value,double y_value,double z_value,double ratio_value) {
+        this(new wPoint(0,0,0),new wPoint(x_value,y_value,z_value),ratio_value,0,2 * Math.PI);
+    }
+
+    /**
+     * Constructor (x_value,y_value,ratio_value)
+     * @param x_value -x of the Ellipse's long axis point;
+     * @param y_value -y of the Ellipse's long axis point;
+     * @param ratio_value -ratio of the Ellipse;
+     */
+    public EntEllipse(double x_value,double y_value,double ratio_value) {
+        this(new wPoint(0,0,0),new wPoint(x_value,y_value,0),ratio_value,0,2 * Math.PI);
+    }
+
+    /**
+     * Constructor (cP,Radius,radius)
+     * @param cP - long axis point of the Ellipse;
+     * @param Radius - Radius(Long Axis) of the Ellipse;
+     * @param radius - radius(Short Axis) of the Ellipse;
+     */
+    public EntEllipse(wPoint2D cP,double Radius,double radius) {
+        this(new wPoint(cP),new wPoint(cP.x + Radius,cP.y,0),radius / Radius,0,2 * Math.PI);
+    }
+
+    /**
+     * Constructor (lP,ratio_value,sAngle_value,eAngle_value)
+     * @param lP - long axis point of the Ellipse;
+     * @param ratio_value -ratio of the Ellipse;
+     * @param sAngle_value - start angle of the Ellipse;
+     * @param eAngle_value - end angle of the Ellipse;
+     */
+    public EntEllipse(wPoint2D lP,double ratio_value,double sAngle_value,double eAngle_value) {
+        this(new wPoint(0,0,0),new wPoint(lP),ratio_value,sAngle_value,eAngle_value);
+    }
+
+    /**
+     * Constructor (lP,ratio_value)
+     * @param lP - long axis point of the Ellipse;
+     * @param ratio_value -ratio of the Ellipse;
+     */
+    public EntEllipse(wPoint2D lP,double ratio_value) {
+        this(new wPoint(0,0,0),new wPoint(lP),ratio_value,0,2 * Math.PI);
+    }
+
+    /**
+     * Constructor (cP,lP,ratio_value,sAngle_value,eAngle_value)
+     * @param cP - center point of the Ellipse;
+     * @param lP - long axis point of the Ellipse;
+     * @param ratio_value -ratio of the Ellipse;
+     * @param sAngle_value - start angle of the Ellipse;
+     * @param eAngle_value - end angle of the Ellipse;
+     */
+    public EntEllipse(wPoint2D cP,wPoint2D lP,double ratio_value,double sAngle_value,double eAngle_value) {
+        this(new wPoint(cP),new wPoint(lP),ratio_value,sAngle_value,eAngle_value);
+    }
+
+    /**
+     * Constructor (cP,lP,ratio_value)
+     * @param cP - center point of the Ellipse;
+     * @param lP - long axis point of the Ellipse;
+     * @param ratio_value -ratio of the Ellipse;
+     */
+    public EntEllipse(wPoint2D cP,wPoint2D lP,double ratio_value) {
+        this(new wPoint(cP),new wPoint(lP),ratio_value,0,2 * Math.PI);
+    }
+
+    /**
+     * Constructor (Pc,Pa,Pb)
+     * @param Pc - Center point of the Ellipse;
+     * @param Pa - Long axis point of the Ellipse;
+     * @param Pb - Short axis point of the Ellipse;
+     */
+    public EntEllipse(wPoint2D Pc,wPoint2D Pa,wPoint2D Pb) {
+        this(new wPoint(Pc),new wPoint(Pa),Pc.GetDistance(Pb) / Pc.GetDistance(Pa),0,2 * Math.PI);
     }
 
     /**
@@ -218,16 +247,7 @@ public class EntEllipse extends EntBase {
      * @param oneEllipse -one object derived from class EntEllipse;
      */
     public EntEllipse(EntEllipse oneEllipse) {
-        this.cPoint = oneEllipse.cPoint;
-        this.lPoint = oneEllipse.lPoint;
-        this.ratio = oneEllipse.ratio;
-        this.sAngle = oneEllipse.sAngle;
-        this.eAngle = oneEllipse.eAngle;
-        this.thickness = oneEllipse.thickness;
-        this.xExtrusionDirection = oneEllipse.xExtrusionDirection;
-        this.yExtrusionDirection = oneEllipse.yExtrusionDirection;
-        this.zExtrusionDirection = oneEllipse.zExtrusionDirection;
-        Handle = FileDXF.ApplyHandle();
+        this(oneEllipse.cPoint,oneEllipse.lPoint,oneEllipse.ratio,oneEllipse.sAngle,oneEllipse.eAngle);
     }
 
     /**
@@ -245,22 +265,49 @@ public class EntEllipse extends EntBase {
 
     /**
      * Print2D()
-     * Terminal output x,y of cPoint and end_point.(one Ellipse for one point)
+     * Terminal output x,y of cPoint and lPoint.(one Ellipse)
      */
     public void Print2D() {
-        System.out.println("Start point:  "+"x = " + this.cPoint.x+"   y = " + this.cPoint.y);
+        System.out.println("Center point:  " + "x = " + this.cPoint.x+"   y = " + this.cPoint.y);
+        System.out.println("Long axis point:  " + "x = " + this.lPoint.x+"   y = " + this.lPoint.y);
         System.out.println("ratio:  "+"x = " + this.ratio);
         System.out.println("Start angle=  " + this.sAngle+"   End angle= " + this.eAngle);
     }
 
     /**
      * Print3D()
-     * Terminal output x,y,z of cPoint and end_point.(one Ellipse for one point)
+     * Terminal output x,y,z of cPoint and lPoint.(one Ellipse)
      */
     public void Print3D() {
-        System.out.println("Start point:  "+"x = "+this.cPoint.x+"   y = " + this.cPoint.y+"   z = " + this.cPoint.z);
+        System.out.println("Center point:  " + "x = " + this.cPoint.x+"   y = " + this.cPoint.y + "   z = " + this.cPoint.z);
+        System.out.println("Long axis point:  " + "x = " + this.lPoint.x+"   y = " + this.lPoint.y + "   z = " + this.lPoint.z);
         System.out.println("ratio:  "+"x = " + this.ratio);
         System.out.println("Start angle=  " + this.sAngle+"   End angle= " + this.eAngle);
+    }
+
+    /**
+     * GetRadius()
+     * Get the Radius of the Ellipse
+     */
+    public double GetRadius() {
+        double Radius;
+
+        Radius = this.cPoint.GetDistance(lPoint);
+
+        return Radius;
+    }
+
+    /**
+     * Getradius()
+     * Get the radius of the Ellipse
+     */
+    public double Getradius() {
+        double Radius,radius;
+
+        Radius = this.cPoint.GetDistance(lPoint);
+        radius = Radius * this.ratio;
+
+        return radius;
     }
 
     /**
@@ -276,15 +323,19 @@ public class EntEllipse extends EntBase {
     }
 
     /**
-     * GetArcLength()
+     * GetParimeter()
      * Get the Ellipse length of the Ellipse
      */
-    public double GetArcLength() {
-        double arclength;
+    public double GetParimeter() {
+        double Radius,radius;
+        double parimeter;
 
-        arclength = 2 * Math.PI * this.ratio * (this.eAngle - this.sAngle) / 360.0;
+        Radius = this.cPoint.GetDistance(lPoint);
+        radius = Radius * this.ratio;
 
-        return arclength;
+        parimeter = 2 * Math.PI * radius + 4 * (Radius - radius);
+
+        return parimeter;
     }
 
     /**
@@ -292,9 +343,13 @@ public class EntEllipse extends EntBase {
      * Get the area of the Ellipse
      */
     public double GetArea() {
+        double Radius,radius;
         double area;
 
-        area = Math.PI * Math.pow(this.ratio,2) * (this.eAngle - this.sAngle) / 360.0;
+        Radius = this.cPoint.GetDistance(lPoint);
+        radius = Radius * this.ratio;
+
+        area = Math.PI * Radius * radius;
 
         return area;
     }
