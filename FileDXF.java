@@ -1,5 +1,5 @@
 //package www
-//This Version support AC1009,the dxf file created can be imported into all the versions of AutoCAD
+//This Version support AC1015,the dxf file created can be imported into all the versions of AutoCAD
 //AutoCAD DXF File -- Six Sections: Header Classes Tables Blocks Entities Objects
 import java.util.*;
 
@@ -875,7 +875,7 @@ public class FileDXF {
         SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         this.jpg_filename = "cylinder_" + df.format(new Date()) + ".png";
 
-        String s="÷–Œƒ≤‚ ‘Apache Flink 1.7.0 Release Announcement";
+        String s="√ñ√ê√é√Ñ¬≤√¢√ä√îApache Flink 1.7.0 Release Announcement";
         Font font = new Font("SimSong", Font.BOLD, 25);
         BufferedImage bi = new BufferedImage(1200, 800, BufferedImage.TYPE_INT_RGB);
         //Graphics2D g2 = (Graphics2D) bi.getGraphics();
