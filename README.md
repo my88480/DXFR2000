@@ -13,7 +13,7 @@ ENTITIES:<BR>
   
   Vesatile Contructors:
   
-void	AddEllipse()
+void	AddEllipse()<BR>
 AddEllipse(empty) default Ellipse.
 
 void	AddEllipse(double x_value, double y_value, double ratio_value)<BR>
